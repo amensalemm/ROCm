@@ -58,8 +58,8 @@ jobs:
     matrix:
       gfx942:
         JOB_GPU_TARGET: gfx942
-      # gfx90a:
-      #   JOB_GPU_TARGET: gfx90a
+      gfx90a:
+        JOB_GPU_TARGET: gfx90a
   steps:
   - template: ${{ variables.CI_TEMPLATE_PATH }}/steps/dependencies-other.yml
     parameters:
@@ -121,9 +121,9 @@ jobs:
       gfx942:
         JOB_GPU_TARGET: gfx942
         JOB_TEST_POOL: ${{ variables.GFX942_TEST_POOL }}
-      # gfx90a:
-      #   JOB_GPU_TARGET: gfx90a
-      #   JOB_TEST_POOL: ${{ variables.GFX90A_TEST_POOL }}
+      gfx90a:
+        JOB_GPU_TARGET: gfx90a
+        JOB_TEST_POOL: ${{ variables.GFX90A_TEST_POOL }}
   steps:
   - template: ${{ variables.CI_TEMPLATE_PATH }}/steps/dependencies-other.yml
     parameters:
@@ -147,6 +147,6 @@ jobs:
       testParameters: '--gtest_filter="*checkin*" --gtest_output=xml:./test_output.xml --gtest_color=yes'
   - template: ${{ variables.CI_TEMPLATE_PATH }}/steps/docker-container.yml
     parameters:
+      aptPackages: ${{ parameters.aptPackages }}
       environment: test
       gpuTarget: $(JOB_GPU_TARGET)
-      forceDockerCreation: true
