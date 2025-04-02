@@ -141,6 +141,7 @@ jobs:
 
 - ${{ each job in parameters.jobMatrix.testJobs }}:
   - job: rocBLAS_test_${{ job.target }}
+    timeoutInMinutes: 90
     dependsOn: rocBLAS_build_${{ job.target }}
     condition:
       and(succeeded(),
@@ -175,6 +176,7 @@ jobs:
         testDir: '$(Agent.BuildDirectory)/rocm/bin'
         testExecutable: './rocblas-test'
         testParameters: '--yaml rocblas_smoke.yaml --gtest_output=xml:./test_output.xml --gtest_color=yes'
+    - template: ${{ variables.CI_TEMPLATE_PATH }}/steps/gpu-diagnostics.yml
     - template: ${{ variables.CI_TEMPLATE_PATH }}/steps/docker-container.yml
       parameters:
         aptPackages: ${{ parameters.aptPackages }}
