@@ -38,7 +38,7 @@ variables:
 - name: LATEST_RELEASE_TAG
   value: rocm-6.3.4
 - name: DOCKER_SKIP_GFX
-  value: gfx90a
+  value: gfx
 - name: AMDMIGRAPHX_GFX942_TEST_PIPELINE_ID
   value: 197
 - name: AMDMIGRAPHX_PIPELINE_ID
